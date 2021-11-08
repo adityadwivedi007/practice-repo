@@ -1,9 +1,45 @@
-
-
 <?php
+    include "connetion.php";
+     session_start();
+     $semail=$_SESSION['email'];
+    $sql4="SELECT name FROM student WHERE email='$semail';";
+    //echo $sql4;
+    $query4=mysqli_query($con,$sql4) or die("Error");
+    $row3 = mysqli_fetch_array($query4);
+    echo "<h3> Hello, ",$row3['name'],"</h2>";
+     if($_SESSION['email']=='')
+     {
+        header('location:login.php');
+     }
+     else
+     {
+         include "connection";
+     }
+
+    ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post">
+<input type="submit" name="logout" value="logout">
+</form>
+<?php
+ if(isset($_POST['logout'])){
+     header('Location:logout.php');
+ }
 
 
-$con=mysqli_connect("localhost:3306","root","","student1") or die("Error in Connection");
+
+?>
+</body>
+</html>
+<?php
 
 $query=mysqli_query($con,"Select * from student") or die("Error in Query");
 
